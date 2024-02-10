@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script>
+
+	function validateForm()
+	{
+		
+		let pwdregx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?!.*\s)(?=.{8,})");
+		
+		let p = document.getElementById("pwd").value;
+		
+		if(pwdregx.test(p))
+		{
+			document.getElementById("pwderr").innerHTML=" ";
+		}
+		else
+		{
+			document.getElementById("pwderr").innerHTML="   Enter valid password";
+			return false;
+		}
+
+
+		let string1 = document.getElementById("txtCap").value;
+              	let string2 = removeSpaces(document.getElementById("txtInput").value);
+		
+		if (string1 != string2)
+		{
+                		document.getElementById("caperr").innerHTML="   Captcha is wrong";
+			return false;        
+              	}
+	}
+
+	function showPassword() 
+	{
+  		let x = document.getElementById("pwd");
+  		
+		if (x.type === "password") 
+		{
+    			x.type = "text";
+  		} 
+		else 
+		{
+    			x.type = "password";
+		}
+	}
+
+         function generateCaptcha()
+         {
+         	let arr = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+                                                 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+                                                 '0','1','2','3','4','5','6','7','8','9');
+             	let captcha = "";
+             	
+		for (i=0;i<6;i++)
+		{
+			captcha += arr[Math.floor(Math.random() * arr.length)];
+			
+               	}
+            
+            	document.getElementById("txtCap").value= captcha;
+          }
+
+         function removeSpaces(string)
+	{
+            	return string.split(" ").join("");
+         }
+
+      </script>   
+   </head>
+
+   <body onload="generateCaptcha()">
+	
+	<h3>Registration Form</h3>
+
+    	<form onsubmit="return validateForm()" action="FormSuccess.html">
+
+		<label for="uname">Name:</label><br>
+  		<input type="text" id="uname" required><br><br>
+		
+		<label for="pwd">Password:<span id="pwderr"></span></label><br>
+  		<input type="password" id="pwd" required>
+		 
+		<input type="checkbox" id="chkb" onclick="showPassword()">
+		<label for="chkb">Show Password</label><br><br>
+
+	     	<label for="txtInput">Captcha:<span id="caperr"></span></label><br>
+         	<input type="text" id="txtInput" required> 
+		<input type="text" id="txtCap" readonly>
+		
+		<input type="button" id="refresh" value="Refresh" onclick="generateCaptcha()" ><br><br><br>   
+              
+         	<input type="submit">
+	</form>
+
+   </body>
+</html>

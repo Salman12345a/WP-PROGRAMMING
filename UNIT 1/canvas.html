@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+ <body>
+  <canvas id="mycanvas" width="300" height="200" style="border:1px solid red">
+  </canvas>
+  
+  <script>
+    let c=document.getElementById("mycanvas");
+    let cxt=c.getContext("2d");
+    
+    cxt.beginPath();
+    //cxt.moveTo(30,30);
+    //cxt.lineTo(150,30);
+    cxt.fillText("Hello",30,30);
+    
+    
+    cxt.stroke();
+   </script>
+ </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <body>
+     <canvas id="mycanvas" width="300" height="200" 
+                          style="border:1px solid">
+      </canvas>
+      <script>
+        let c = document.getElementById("mycanvas");
+        let ctx = c.getContext("2d");
+        
+        let r = 20;
+        
+        let x = 50;
+        let y = 50;
+        
+        let dx = 1;
+        let dy = 1;
+        
+        function animation()
+        {
+          window.requestAnimationFrame(animation);
+          
+          ctx.clearRect(0,0,300,200);
+          
+          if((x+r > 300)||(x-r < 0))
+          {
+            dx = -dx;
+          }
+          
+          if((y+r > 200)||(y-r < 0))
+          {
+            dy = -dy;
+          }
+          
+          x += dx;
+          y += dy;
+          
+          ctx.beginPath();
+          ctx.arc(x,y,r,0,2*Math.PI);
+          ctx.stroke();
+        }
+        
+        animation();
+      </script>
+  </body>
+</html>
